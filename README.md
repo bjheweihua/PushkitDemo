@@ -58,18 +58,18 @@ Answer:PushKit中的voippush,可以帮助我们提升voip应用的体验，优�
 
  
 ### 使用PushMeBaby需要注意
- 1.运行如果报错，那么导入CoreServices.framawork
- 替换这句 #include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>  为  #include <MacTypes.h>
- 2.把你的开发证书.cer 文件更改名为apns.cer，放入工程中，代码中是通过
- self.certificate = [[NSBundle mainBundle] pathForResource:@"apns" ofType:@"cer”];取你的证书文件的
- 3.在输入框中粘贴进去你的deviceToken，注意不要带<>，空格可以有
- 4.可以开心的测试了~
+1.运行如果报错，那么导入CoreServices.framawork，替换这句 #include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>  为  #include <MacTypes.h>；
+2.把你的开发证书.cer 文件更改名为apns.cer，放入工程中，代码中是通过；
+ self.certificate = [[NSBundle mainBundle] pathForResource:@"apns" ofType:@"cer”];取你的证书文件的；
+3.在输入框中粘贴进去你的deviceToken，注意不要带<>，空格可以有；
+4.可以开心的测试了~
+
  
  
-# 遇到的坑：
+### 遇到的坑：
 注册VoIPPushes，收不到token回调时，重启iphone设备就好了。
 使用系统TTS播报，没有声音问题，服务端下发静默推送："content-available":1， eg:{"aps":{"alert":"收到语音推送","badge":1,"sound":"default","voiceOpen":1,"content-available":1}}
 
 
-# 总结：
+### 总结：
 在调用过程中，走了很多弯路，钻过死胡同，差点就出不来了。讨论商量，集思广益，熟悉系统API, 关注WWDC非常重要，只要获取到一点点线索，都可能帮你发现新大陆，解决大问题。
