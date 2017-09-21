@@ -7,7 +7,7 @@
  3. PushKit的默认行为里面是不会弹出通知, 需要提示的话，本地通知推送。
  4. 收到PushKit推送, 走AVSpeechSynthesisVoice系统自带TTS（这里采用本地离线语音合成）。
  5. APP挂载kill时，需要被唤起，加代码：AVAudioSessionCategoryPlayback。
- 6. 服务端NWPusher、PushMeBaby: https://github.com/stefanhafeneger/PushMeBaby。
+ 6. 服务端NWPusher、PushMeBaby。
  
 
 ### 二.参照：
@@ -48,10 +48,11 @@ Answer:PushKit中的voippush,可以帮助我们提升voip应用的体验，优�
  对于pushkit，除了苹果framework官方文档：https://developer.apple.com/library/prerelease/ios/documentation/NetworkingInternet/Reference/PushKit_Framework/index.html#protocols 以外，能够找到的帮助理解PushKit的莫过于wwdc的视频：712_sd_writing_energy_efficient_code_part_2。该视频也可以从苹果官网下载。
  
 ### 使用push kit的优点 
- 1.应用的voip长连接不保持，在收到呼叫或者发起呼叫时再连接；
- 2.当呼叫发送到voip 服务器时，对端若不在线，通过voip 服务器连接到pushserver向对端发push通知；
- 3.应用收到voip push通知时，迅速完成注册；
- 4.呼叫方通过延时操作等逻辑（复杂一点对voip服务器进行改造，被叫连接上来以后通知到主叫侧），再次发起呼叫，通话即成功建立。
+ 1. 应用的voip长连接不保持，在收到呼叫或者发起呼叫时再连接；
+ 2. 当呼叫发送到voip 服务器时，对端若不在线，通过voip 服务器连接到pushserver向对端发push通知；
+ 3. 应用收到voip push通知时，迅速完成注册；
+ 4. 呼叫方通过延时操作等逻辑（复杂一点对voip服务器进行改造，被叫连接上来以后通知到主叫侧），再次发起呼叫，通话即成功建立。
+
  
  
 ### 推送服务：
@@ -60,17 +61,16 @@ Answer:PushKit中的voippush,可以帮助我们提升voip应用的体验，优�
 
  
 ### 使用PushMeBaby需要注意
-1.运行如果报错，那么导入CoreServices.framawork，替换这句 #include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>  为  #include <MacTypes.h>；
-2.把你的开发证书.cer 文件更改名为apns.cer，放入工程中，代码中是通过；
- self.certificate = [[NSBundle mainBundle] pathForResource:@"apns" ofType:@"cer”];取你的证书文件的；
-3.在输入框中粘贴进去你的deviceToken，注意不要带<>，空格可以有；
-4.可以开心的测试了~
+ 1. 运行如果报错，那么导入CoreServices.framawork，替换这句 #include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>  为  #include <MacTypes.h>；
+ 2. 把你的开发证书.cer 文件更改名为apns.cer，放入工程中，代码中是通过；self.certificate = [[NSBundle mainBundle] pathForResource:@"apns" ofType:@"cer”];取你的证书文件的；
+ 3. 在输入框中粘贴进去你的deviceToken，注意不要带<>，空格可以有；
+ 4. 可以开心的测试了~
 
  
  
 ### 遇到的坑：
 注册VoIPPushes，收不到token回调时，重启iphone设备就好了。
-使用系统TTS播报，没有声音问题，服务端下发静默推送："content-available":1， eg:{"aps":{"alert":"收到语音推送","badge":1,"sound":"default","voiceOpen":1,"content-available":1}}
+使用系统TTS播报，没有声音问题，服务端下发静默推送："content-available":1, eg:{"aps":{"alert":"收到语音推送","badge":1,"sound":"default","voiceOpen":1,"content-available":1}}
 
 
 ### 总结：
