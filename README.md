@@ -7,18 +7,14 @@
  3. PushKit的默认行为里面是不会弹出通知, 需要提示的话，本地通知推送。
  4. 收到PushKit推送, 走AVSpeechSynthesisVoice系统自带TTS（这里采用本地离线语音合成）。
  5. APP挂载kill时，需要被唤起，加代码：AVAudioSessionCategoryPlayback。
- 6. 服务端PushMeBaby: https://github.com/stefanhafeneger/PushMeBaby。
- 1).
- 2).
- 3).
- 4).
- 5).
- 6)
+ 6. 服务端NWPusher、PushMeBaby: https://github.com/stefanhafeneger/PushMeBaby。
+ 
 
 ### 二.参照：
-1).微信iOS收款到账语音提醒开发总结：https://mp.weixin.qq.com/s/yYCaPMxHGT9LyRyAPewVWQ
-2).iOS 8 pushkit使用总结：http://www.jianshu.com/p/5939dcb5fcd2
-3).PushMeBaby的使用步骤:http://www.cnblogs.com/liuwj/p/6879382.html
+1. 微信iOS收款到账语音提醒开发总结：https://mp.weixin.qq.com/s/yYCaPMxHGT9LyRyAPewVWQ
+2. iOS 8 pushkit使用总结：http://www.jianshu.com/p/5939dcb5fcd2
+3. PushMeBaby的使用步骤:http://www.cnblogs.com/liuwj/p/6879382.html
+
 
 
 One day，产品经理拿着微信二维码，演示一下微信的收款语言提醒，问我这个能实现吗？ 一看觉挺简单的，就着手调研。
