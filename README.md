@@ -2,12 +2,18 @@
 # 仿微信收款语音提醒功能（在挂载的时候）
 
 ### 一.PushKit (这里用此方法，实现仿微信语音提醒功能-在后台)
- 1).申请voip_services.cer, 开发生产环境都同一个证书。
- 2).用了voip_services不需要用apns证书(一个voip证书搞定)，也不用再注册apns推送。
- 3).PushKit的默认行为里面是不会弹出通知, 需要提示的话，本地通知推送。
- 4).收到PushKit推送, 走AVSpeechSynthesisVoice系统自带TTS（这里采用本地离线语音合成）。
- 5).APP挂载kill时，需要被唤起，加代码：AVAudioSessionCategoryPlayback。
- 6).服务端PushMeBaby: https://github.com/stefanhafeneger/PushMeBaby。
+ 1. 申请voip_services.cer, 开发生产环境都同一个证书。
+ 2. 用了voip_services不需要用apns证书(一个voip证书搞定)，也不用再注册apns推送。
+ 3. PushKit的默认行为里面是不会弹出通知, 需要提示的话，本地通知推送。
+ 4. 收到PushKit推送, 走AVSpeechSynthesisVoice系统自带TTS（这里采用本地离线语音合成）。
+ 5. APP挂载kill时，需要被唤起，加代码：AVAudioSessionCategoryPlayback。
+ 6. 服务端PushMeBaby: https://github.com/stefanhafeneger/PushMeBaby。
+ 1).
+ 2).
+ 3).
+ 4).
+ 5).
+ 6)
 
 ### 二.参照：
 1).微信iOS收款到账语音提醒开发总结：https://mp.weixin.qq.com/s/yYCaPMxHGT9LyRyAPewVWQ
