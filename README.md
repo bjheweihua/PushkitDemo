@@ -67,10 +67,9 @@ Answer:PushKit中的voippush,可以帮助我们提升voip应用的体验，优�
  4. 可以开心的测试了~
 
  
- 
 ### 遇到的坑：
-注册VoIPPushes，收不到token回调时，重启iphone设备就好了。
-使用系统TTS播报，没有声音问题，服务端下发静默推送："content-available":1, eg:{"aps":{"alert":"收到语音推送","badge":1,"sound":"default","voiceOpen":1,"content-available":1}}
+ 1. 注册VoIPPushes，收不到token回调时，重启iphone设备就好了。
+ 2. 使用系统TTS播报，没有声音问题，服务端下发静默推送："content-available":1, eg:{"aps":{"alert":"收到语音推送","badge":1,"sound":"default","voiceOpen":1,"content-available":1}}
 
 
 ### 总结：
