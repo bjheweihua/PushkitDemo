@@ -1,5 +1,5 @@
 # PushkitDemo
-# 仿微信收款语音提醒功能（在挂载的时候）
+# 仿微信收款语音提醒功能PushKit（挂载时可被唤起）
 
 ### 一.PushKit (这里用此方法，实现仿微信语音提醒功能-在后台)
  1. 申请voip_services.cer, 开发生产环境都同一个证书。
@@ -71,7 +71,7 @@ One day，产品经理拿着微信二维码，演示一下微信的收款语言�
 使用APNS，收到推送本地播报语音（TTS生成的音频文件):用科大讯飞的免费的本地语音合成, 进行语音播报。
 问题是解决了，但里边的原理逻辑还没弄明白，如果用苹果系统自带的本地离线语音合成才是正道，不用接第三SDK, 也可以减少包体积。
  
-### 方案二：世人只知有APNS，却不知还有PushKit。
+### 方案二：世人只知APNS，却不知还有PushKit。
 使用PushKit,收到推送使用系统自带的TTS(AVSpeechSynthesisVoice)进行语音播报，PushKit没有通知提醒，需要使用本地推送默认APNS效果。
 微信的Bugly推送了一篇文章，#微信iOS收款到账语音提醒开发总结#提到了VoIP Push Notification，具体实现没提到，微信的实现用的是在线语音合成，试了下VoIP Push Notification还是实现不了后台语音播报，搜索了很多资料无果，进入死胡同。
 
@@ -128,10 +128,9 @@ pushkit收到消息后，不会像普通推送那样走系统提示。如果要�
  4. 可以开心的测试了~
 
  
- 
 ### 遇到的坑：
-注册VoIPPushes，收不到token回调时，重启iphone设备就好了。
-使用系统TTS播报，没有声音问题，服务端下发静默推送："content-available":1, eg:{"aps":{"alert":"收到语音推送","badge":1,"sound":"default","voiceOpen":1,"content-available":1}}
+ 1. 注册VoIPPushes，收不到token回调时，重启iphone设备就好了。
+ 2. 使用系统TTS播报，没有声音问题，服务端下发静默推送："content-available":1, eg:{"aps":{"alert":"收到语音推送","badge":1,"sound":"default","voiceOpen":1,"content-available":1}}
 
 
 ### 总结：
