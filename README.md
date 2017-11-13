@@ -9,11 +9,55 @@
  5. APP挂载kill时，需要被唤起，加代码：AVAudioSessionCategoryPlayback。
  6. 服务端NWPusher、PushMeBaby。
  
+ ### 推送消息json格式
+
+ ```
+1) 普通推送json格式
+iOS10之前
+{
+    "aps":{
+        "alert":"内容",
+        "badge":1,
+        "sound":"default"
+    },
+    "userinfo":{"username":"tom"}
+}
+iOS10及之后(iOS7、iOS8、iOS9可通用此模板)
+{
+    "aps":{
+        "alert":{
+            "title":"标题",     // iOS7、8设置无效，iOS9一般设置为appName
+            "subtitle":"子标题", // 一般使用title就能满足需求
+            "body":"内容"
+        },
+        "badge":1,         //角标数
+        "sound":"default"  //声音
+    },
+    "userinfo":{       // 自定义数据
+        "playid":"123",
+        "username":"tom",
+        "sex":1
+    }
+}
+2) 语音推送json格式
+{
+    "aps": {
+        "alert": "收到语音提醒",
+        "badge": 1,
+        "content-available": 1, // 后台唤起，必须
+        "sound": "default"      // 默认提示音，非必须
+    },
+    "voiceOpen": 1 // 是否播放语音 0:不播 1:播放 int
+}
+ ```
+ 
 
 ### 二.参照：
 1. 微信iOS收款到账语音提醒开发总结：https://mp.weixin.qq.com/s/yYCaPMxHGT9LyRyAPewVWQ
 2. iOS 8 pushkit使用总结：http://www.jianshu.com/p/5939dcb5fcd2
 3. PushMeBaby的使用步骤:http://www.cnblogs.com/liuwj/p/6879382.html
+4. 推送格式，苹果官方文档：https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW1
+5. 客户端，苹果官方文档：https://developer.apple.com/library/content/documentation/Performance/Conceptual/EnergyGuide-iOS/OptimizeVoIP.html
 
 
 
@@ -37,6 +81,21 @@ One day，产品经理拿着微信二维码，演示一下微信的收款语言�
  1. Apple APNS:https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/
  2. Silent Push: http://hayageek.com/ios-silent-push-notifications
  3. PushKit
+
+ 
+ 
+### 为什么使用PushKit？
+
+iOS10之后，苹果推出了CallKit框架增强VoIP应用的体验，主要表现在3个方面：
+
+在锁屏状态下，如果有网络电话呼入，VoIP应用可以打开系统电话应用的待接听界面，告别了原来推送通知的展现方式。
+VoIP应用内发起通话、挂断电话等记录可以体现在系统电话应用的通话记录中。
+从系统电话应用的通话记录、通讯录或者siri进入VoIP应用，发起通话。
+总而言之，我们的VoIP应用拥有了和系统通话应用一样的用户体验。
+那么，如何在锁屏状态下，呼出系统应用的待接听界面？如何在app杀死或者后台的情况下，知道有用户呼入？
+
+在iOS8之后，苹果引入新的框架PushKit，一种新的push方式，有别于普通的APNs，它不会弹出通知，而是悄悄的告诉我们的app有推送过来，让app做出相应的处理。iOS10开始，苹果不在支持VoIP应用的后台socket长连接，需要使用苹果推荐的pushkit，降低app耗电。PushKit可以说是“准实时”的，实际上延迟在1s左右。
+
  
  
 ### 下面介绍下PushKit：
@@ -53,7 +112,9 @@ Answer:PushKit中的voippush,可以帮助我们提升voip应用的体验，优�
  3. 应用收到voip push通知时，迅速完成注册；
  4. 呼叫方通过延时操作等逻辑（复杂一点对voip服务器进行改造，被叫连接上来以后通知到主叫侧），再次发起呼叫，通话即成功建立。
 
- 
+### pushkit与普通推送的区别 
+pushkit在iOS8以上支持；
+pushkit收到消息后，不会像普通推送那样走系统提示。如果要跟普通推送一致，在收到消息时，调用本地推送来模拟普通推送消息提示。
  
 ### 推送服务：
  1. PushMeBaby: https://github.com/stefanhafeneger/PushMeBaby
