@@ -1,4 +1,4 @@
-# PushkitDemo
+# PushkitDemo （被拒， 请参考VoicePushDemo）
 # 仿微信收款语音提醒功能PushKit（挂载时可被唤起）
 
 ### 一.PushKit (这里用此方法，实现仿微信语音提醒功能-在后台)
